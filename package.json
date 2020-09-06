@@ -35,6 +35,8 @@
   "keywords": ["youtube", "yt", "video", "id", "exists", "available", "present"],
   "description": "Checks if a YouTube video exists under the given ID. No API key is required.",
   "author": "Matthias Schwarz",
+  "repository": "github:matthiasschwarz/youtube-video-exists",
+  "bugs": "https://github.com/matthiasschwarz/youtube-video-exists/issues",
   "module": "dist/youtube-video-exists.esm.js",
   "devDependencies": {
     "husky": "^4.2.5",
