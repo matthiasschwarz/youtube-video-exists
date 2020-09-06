@@ -1,5 +1,7 @@
 # youtube-video-exists
 
+[![Coverage Status](https://coveralls.io/repos/github/matthiasschwarz/youtube-video-exists/badge.svg?branch=master)](https://coveralls.io/github/matthiasschwarz/youtube-video-exists?branch=master)
+
 > Checks if a YouTube video exists under the given ID. No API key is required. 
 
 ## How does it work?
