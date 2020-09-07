@@ -34,8 +34,14 @@ export interface VideoInfoResponse {
   validId: boolean
 
   /**
-   * Information about the video
+   * True when the video is private otherwise false or undefined
    * Is defined when existing is true
+   */
+  private?: boolean
+
+  /**
+   * Information about the video
+   * Is defined when existing is true and private is false
    */
   info?: VideoInfo
 }
@@ -58,6 +64,7 @@ export function getVideoInfo(id: string): Promise<VideoInfoResponse> {
   let videoInfoResponse: VideoInfoResponse = {
     existing: false,
     validId: false,
+    private: undefined,
     info: undefined,
   }
 
@@ -71,11 +78,13 @@ export function getVideoInfo(id: string): Promise<VideoInfoResponse> {
           url: `https://youtu.be/${id}`,
           format: 'json',
         },
-        validateStatus: (status: number) => status === 200 || status === 404,
+        validateStatus: (status: number) =>
+          status === 200 || status === 404 || status === 401,
       })
       .then((response: AxiosResponse) => {
         if (response.status === 200) {
           videoInfoResponse.existing = true
+          videoInfoResponse.private = false
           videoInfoResponse.info = {
             title: response.data.title,
             author: {
@@ -83,6 +92,9 @@ export function getVideoInfo(id: string): Promise<VideoInfoResponse> {
               url: response.data.author_url,
             },
           }
+        } else if (response.status === 401) {
+          videoInfoResponse.existing = true
+          videoInfoResponse.private = true
         }
         return videoInfoResponse
       })

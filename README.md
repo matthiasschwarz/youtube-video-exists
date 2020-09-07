@@ -11,7 +11,7 @@ Firstly the video id is checked against a regular expression if it is in a valid
 When this check succedes the YouTube [oEmbed API](https://oembed.com/) is used to see if a video is present under the given ID.
 This requires no API key and might be the best option to receive this information without one.
 
-## Documentation
+## API
 
 ### getVideoInfo
 
@@ -36,6 +36,7 @@ function getVideoInfo(id: string): Promise<VideoInfoResponse> {/** Code ommited 
 const example = {
   existing: true,
   validId: true,
+  private: false,
   info: {
     title: 'YouTube Developers Live: Embedded Web Player Customization',
     author: {
@@ -68,6 +69,25 @@ getVideoInfo('M7lc1UVf-VE').then(value => {
 async function example() {
     const existing = (await getVideoInfo('M7lc1UVf-VE')).existing
     if (existing) console.log('Video exists!')
+}
+```
+
+### Check if the video is private
+
+#### Async
+
+```typescript
+getVideoInfo('ZFxT6d13OKo').then(value => {
+    if (value.existing && value.private) console.log('Video is private!')
+})
+```
+
+#### Blocked
+
+```typescript
+async function example() {
+    const response = await getVideoInfo('ZFxT6d13OKo')
+    if (response.existing && response.private) console.log('Video is private!')
 }
 ```
 
