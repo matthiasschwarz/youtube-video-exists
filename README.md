@@ -20,7 +20,7 @@ function getVideoInfo(id: string): Promise<VideoInfoResponse> {/** Code ommited 
 ```
 
 > Checks if a YouTube video exists under the given ID.
-> When a video is found the return object also includes the title and author of the video
+> When a video is found and it is not private the return object also includes the title and author of the video.
 
 #### Parameters
 

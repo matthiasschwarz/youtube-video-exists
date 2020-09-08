@@ -54,7 +54,7 @@ const idRegex = new RegExp('^([0-9A-Za-z_-]{10}[048AEIMQUYcgkosw])$')
 /**
  * Checks if a YouTube video exists under the given ID
  *
- * When a video is found the return object also includes the title and author of the video
+ * When a video is found and it is not private the return object also includes the title and author of the video
  *
  * @param id - YouTube video id
  * @returns {@link VideoInfoResponse} when {@link Promise} is resolved
